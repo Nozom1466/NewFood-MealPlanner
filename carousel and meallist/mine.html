@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./aos/aos.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            color-scheme: dark !important;
+            background-color: #181a1b !important;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        ul.mj-all-meals {
+            margin: 0 0 1rem;
+            padding: 0;
+            list-style: none outside;
+            clear: both;
+        }
+
+        li.mj-meal {
+            width: 30.75%;
+            float: left;
+            margin: 0 3.8% 3rem 0;
+            padding: 0;
+            position: relative;
+
+            list-style: none outside;
+            list-style-image: initial;
+        }
+
+        li.mj-meal:nth-child(3n) {
+            margin-right: 0;
+        }
+
+        li.mj-meal:nth-child(3n+1) {
+            clear: both;
+            margin-left: 0;
+        }
+
+        .mj-meal-slider-wrapper {
+            width: 100%;
+            max-width: 380px;
+            border: 1px solid #e6e6e6;
+            border-radius: 30px;
+            list-style: none outside;
+            border-color: rgb(55, 60, 62);
+        }
+
+        a {
+            text-decoration-color: initial;
+            text-decoration: none;
+        }
+
+        .mj-meal-slider-img {
+            box-shadow: none;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 0 1rem;
+            object-fit: cover;
+            border-top-right-radius: 30px;
+            border-top-left-radius: 30px;
+
+            /* 长宽比期望为6:4 */
+            aspect-ratio: auto 600 / 400;
+
+            /* 等同于overflow:hidden    可以阻止滚动、强行包裹float  */
+            overflow: clip;
+            overflow-clip-margin: content-box;
+        }
+
+        .mj-meal-slider-content {
+            background-color: rgb(24, 26, 27);
+            border-top-color: initial;
+            border-top: none;
+            border-bottom-right-radius: 30px;
+            border-bottom-left-radius: 30px;
+            margin: -6px auto 10px;
+            padding: 0 24px 24px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mj-meal-slider-content h2 {
+            margin-top: 15px;
+            margin-bottom: 20px;
+            color: rgb(196, 191, 184);
+            font-family: Luxia Display;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1.4;
+            letter-spacing: 0;
+            transition: all .1s ease-in-out;
+        }
+
+        .mj-meal-slider-content h2:hover {
+            color: rgb(181, 167, 131);
+        }
+
+        .mj-meal-slider-content p {
+            color: rgb(163, 156, 144);
+            margin: 0;
+            font-family: Roboto Light;
+            font-size: 10px;
+            font-weight: 400;
+            line-height: 1.6;
+            letter-spacing: 4px;
+            text-align: left;
+            text-transform: uppercase;
+        }
+
+        .mj-button-links {
+            /* 没做响应式 目前是按我的屏幕尺寸调的 */
+            display: inline-block;
+            height: 48px;
+            width: 160px;
+            padding: 10px 23px;
+            margin-top: 9px;
+            color: rgb(208, 138, 240);
+            transition: all .3s ease-in-out;
+            background-image: initial;
+            background-color: initial;
+            font-family: Roboto Medium;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 24px;
+            letter-spacing: 2px;
+            text-align: center;
+            text-transform: uppercase;
+            text-decoration-color: initial;
+            text-decoration: none;
+            border: 2px solid #4a0d66;
+            border-radius: 30px;
+            /* border-radius: 9px; */
+        }
+
+        .mj-button-links:hover {
+            background-color: rgb(59, 10, 82);
+            color: rgb(232, 230, 227);
+        }
+
+        .mj-meal-choices-main {
+            margin: 5% auto;
+            width: 90%;
+        }
+
+        .mj-meal-benefits-carousel-main {
+            margin: 5% auto;
+            width: 90%;
+            overflow-x: hidden;
+            position: relative;
+            cursor: grab;
+        }
+
+        .mj-meal-benefits-carousel-main:active{
+            cursor: grabbing;
+        }
+        
+
+        .mj-carousel-slider > span {
+            font-size: 85px;
+        }
+
+
+        [class*=" icon-"],
+        [class^=icon-] {
+            font-family: icomoon !important;
+            /* speak: never; */
+            font-style: normal;
+            font-weight: 400;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .mj-carousel-slider {
+            position: absolute;
+
+            background-color: rgb(40, 0, 53);
+            /* height: 180px; */
+            width: 30%;
+            border: 1px solid;
+            border-radius: 23px;
+            border-color: rgb(65, 40, 76);
+
+            /* margin: 0 5%; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            aspect-ratio: auto 200 / 100;
+        }
+
+        .mj-carousel-slider > h6 {
+            color: rgb(165, 158, 146);
+            font-family: Roboto Regular;
+            font-size: 14px;
+            letter-spacing: 0;
+            line-height: 24px;
+            text-align: center;
+            margin-top: 6px;
+        }
+
+        .mj-carousel-box {
+            overflow: hidden;
+            touch-action: pan-y;
+            /*消除触屏的附带效果*/
+        }
+    </style>
+
+
+
+
+
+
+</head>
+
+<body>
+
+
+    <!-- 
+        <header class="woocommerce-products-header">
+            <h1 class="woocommerce-products-header__title page-title">Meal Plans</h1>
+            <div class="page-description">
+                <h2>Eatology Meal Plan Features</h2>
+                <p>Based in Hong Kong our goal is to provide you with premium quality food choices that are as flavorful
+                    as they are healthy. Whether you want to lose weight or just want to clean up your diet and say
+                    goodbye to cheap office snacks forever, our meal plan programs have got you covered.</p>
+                <p>Here at <a href="https://www.eatologyasia.com/" target="_blank"
+                        rel="noopener noreferrer">Eatology</a> we believe that making healthy and smart food choices
+                    shouldn’t be synonymous to eating bland, flavourless food. We pride ourselves on sourcing the best
+                    ingredients so that you can enjoy a delicious meal in the comfort of your home or office. Our
+                    premium meal plan delivery service brings together fresh ingredients, and nutritiously delicious
+                    recipes to create tailor made meals designed by certified nutritionists and dietitians.</p>
+                <p style="margin-bottom: 30px">Designed, tested and approved by our team of registered dietitians and
+                    nutritionists to ensure every meal you receive will satisfy your culinary desires. Our selection of
+                    fresh gourmet meal programs will help you lose weight and achieve your nutritional goals. Choose
+                    between our tailor-made meals prepared by our in-house chefs that are guaranteed to keep your inner
+                    foodie happy. Whether you’re trying to get lean, build muscles or just looking for a healthy
+                    lifestyle through a balanced diet, we have a meal plan for you.</p>
+                <p></p>
+                <h2>Hong Kong’s Leading Bespoke Meal Planner</h2>
+                <p>Putting together a diet plan for your weight loss or fitness goals don’t have to be time consuming or
+                    complicated. Healthy and nutrition focused, our fitness meal plan can be tailored to your dietary
+                    and fitness needs- whether you’re vegan or gluten-free, we have got you covered. Featuring organic,
+                    free-range and natural, premium ingredients, meal prepping has never been this simple.</p>
+                <p style="margin-bottom: 30px">With over 100 gourmet recipes designed by certified dietitians and
+                    lovingly prepared by our in-house chefs, we deliver healthy premium meals in programs like low carb,
+                    gluten free and more! Choose between our 9 different meal plans and meet your fitness and weight
+                    loss goals today!</p>
+                <p></p>
+            </div>
+        </header> -->
+
+    <main class="mj-meal-benefits-carousel-main">
+        <div class="mj-carousel-box">
+            <div class="mj-carousel-slider aos-init" data-aos="zoom-in">
+                <span class="icon-free_delivery"> </span>
+                <h6>Free delivery for HK Island and Kowloon</h6>
+            </div>
+            <div class="mj-carousel-slider aos-init" data-aos="zoom-in">
+                <span class="icon-free-concierge-service"></span>
+                <h6>Free concierge service</h6>
+            </div>
+            <div class="mj-carousel-slider aos-init" data-aos="zoom-in">
+                <span class="icon-free-nutritionist"> </span>
+                <h6>Free Nutritionist consultation for every 2 weeks purchased</h6>
+            </div>
+            <div class="mj-carousel-slider aos-init" data-aos="zoom-in">
+                <span class="icon-free-change-of-delivery-time"></span>
+                <h6>Free change of delivery time / place notice with a 48h notice</h6>
+            </div>
+            <div class="mj-carousel-slider aos-init" data-aos="zoom-in">
+                <span class="icon-free-suspension"></span>
+                <h6>Free suspension of the program with a 48h notice</h6>
+            </div>
+        </div>
+    </main>
+
+    <main class="mj-meal-choices-main">
+        <ul class="mj-all-meals">
+            <li class="mj-meal aos-init" data-aos="zoom-in-up">
+                <div class="mj-meal-slider-wrapper">
+                    <a href="https://www.eatologyasia.com/product/meal-plans/healthy/gluten-free-low-carb/">
+                        <img width="600" height="400" class="mj-meal-slider-img"
+                            src="https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_DSC03732-600x400.jpg"
+                            alt="Low Carb Meal Plan" decoding="async" loading="lazy"
+                            srcset="https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_DSC03732-600x400.jpg 600w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_DSC03732-360x240.jpg 360w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_DSC03732-1024x683.jpg 1024w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_DSC03732-768x512.jpg 768w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_DSC03732-1536x1025.jpg 1536w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_DSC03732-2048x1366.jpg 2048w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_DSC03732-720x480.jpg 720w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_DSC03732-530x354.jpg 530w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_DSC03732-810x540.jpg 810w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_DSC03732-1260x840.jpg 1260w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_DSC03732-2000x1334.jpg 2000w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_DSC03732-800x534.jpg 800w"
+                            sizes="(max-width: 600px) 100vw, 600px"></a>
+                    <div class="mj-meal-slider-content">
+                        <a href="https://www.eatologyasia.com/product/meal-plans/healthy/gluten-free-low-carb/">
+                            <h2>Gluten-Free Low Carb</h2>
+                            <p>Eliminates gluten and reduces carbohydrate intake.</p>
+                        </a><a href="https://www.eatologyasia.com/product/meal-plans/healthy/gluten-free-low-carb/"
+                            class="mj-button-links">View Details</a>
+                    </div>
+                </div>
+            </li>
+            <li class="mj-meal aos-init" data-aos="zoom-in-up">
+                <div class="mj-meal-slider-wrapper">
+                    <a href="https://www.eatologyasia.com/product/meal-plans/diet/keto-light/">
+                        <img width="600" height="406" class="mj-meal-slider-img"
+                            src="https://www.eatologyasia.com/wp-content/uploads/2020/04/meal-plan-ketogenic-600x406.jpg"
+                            alt="Ketogenic Diet Plan" decoding="async" loading="lazy"
+                            srcset="https://www.eatologyasia.com/wp-content/uploads/2020/04/meal-plan-ketogenic-600x406.jpg 600w, https://www.eatologyasia.com/wp-content/uploads/2020/04/meal-plan-ketogenic-360x244.jpg 360w, https://www.eatologyasia.com/wp-content/uploads/2020/04/meal-plan-ketogenic-530x359.jpg 530w, https://www.eatologyasia.com/wp-content/uploads/2020/04/meal-plan-ketogenic.jpg 713w"
+                            sizes="(max-width: 600px) 100vw, 600px"></a>
+                    <div class="mj-meal-slider-content">
+                        <a href="https://www.eatologyasia.com/product/meal-plans/diet/keto-light/">
+                            <h2>Ketogenic diet Light</h2>
+                            <p> A low-carb, high-fat diet.</p>
+                        </a><a href="https://www.eatologyasia.com/product/meal-plans/diet/keto-light/"
+                            class="mj-button-links">View Details</a>
+                    </div>
+                </div>
+            </li>
+            <li class="mj-meal aos-init" data-aos="zoom-in-up">
+                <div class="mj-meal-slider-wrapper">
+                    <a href="https://www.eatologyasia.com/product/meal-plans/healthy/mediterranean/">
+                        <img width="600" height="406" class="mj-meal-slider-img"
+                            src="https://www.eatologyasia.com/wp-content/uploads/2020/04/meal-plan-diabetes-friendly-balanced-living-1-600x406.jpg"
+                            alt="Mediterranean Diet Plan" decoding="async" loading="lazy"
+                            srcset="https://www.eatologyasia.com/wp-content/uploads/2020/04/meal-plan-diabetes-friendly-balanced-living-1-600x406.jpg 600w, https://www.eatologyasia.com/wp-content/uploads/2020/04/meal-plan-diabetes-friendly-balanced-living-1-360x244.jpg 360w, https://www.eatologyasia.com/wp-content/uploads/2020/04/meal-plan-diabetes-friendly-balanced-living-1-530x359.jpg 530w, https://www.eatologyasia.com/wp-content/uploads/2020/04/meal-plan-diabetes-friendly-balanced-living-1.jpg 713w"
+                            sizes="(max-width: 600px) 100vw, 600px"></a>
+                    <div class="mj-meal-slider-content">
+                        <a href="https://www.eatologyasia.com/product/meal-plans/healthy/mediterranean/">
+                            <h2>Mediterranean</h2>
+                            <p>Inspired by the traditional cuisine of countries bordering the Mediterranean Sea</p>
+                        </a><a href="https://www.eatologyasia.com/product/meal-plans/healthy/mediterranean/"
+                            class="mj-button-links">View Details</a>
+                    </div>
+                </div>
+            </li>
+            <li class="mj-meal aos-init" data-aos="zoom-in-up">
+                <div class="mj-meal-slider-wrapper">
+                    <a href="https://www.eatologyasia.com/product/meal-plans/lifestyle/asian/">
+                        <img width="600" height="406" class="mj-meal-slider-img"
+                            src="https://www.eatologyasia.com/wp-content/uploads/2020/01/meal-plan-aisan-600x406.jpg"
+                            alt="Asian meal plan" decoding="async" loading="lazy"
+                            srcset="https://www.eatologyasia.com/wp-content/uploads/2020/01/meal-plan-aisan-600x406.jpg 600w, https://www.eatologyasia.com/wp-content/uploads/2020/01/meal-plan-aisan-360x244.jpg 360w, https://www.eatologyasia.com/wp-content/uploads/2020/01/meal-plan-aisan-530x359.jpg 530w, https://www.eatologyasia.com/wp-content/uploads/2020/01/meal-plan-aisan.jpg 713w"
+                            sizes="(max-width: 600px) 100vw, 600px"></a>
+                    <div class="mj-meal-slider-content">
+                        <a href="https://www.eatologyasia.com/product/meal-plans/lifestyle/asian/">
+                            <h2>Asian</h2>
+                            <p>A diverse range of diets inspired by the traditional cuisine of various Asian
+                                countries</p>
+                        </a><a href="https://www.eatologyasia.com/product/meal-plans/lifestyle/asian/"
+                            class="mj-button-links">View Details</a>
+                    </div>
+                </div>
+            </li>
+            <li class="mj-meal aos-init" data-aos="zoom-in-up">
+                <div class="mj-meal-slider-wrapper">
+                    <a href="https://www.eatologyasia.com/product/meal-plans/healthy/optimal-performance/">
+                        <img width="600" height="406" class="mj-meal-slider-img"
+                            src="https://www.eatologyasia.com/wp-content/uploads/2020/05/meal-plan-muscle-building-600x406.jpg"
+                            alt="Fitness Meal Plan" decoding="async" loading="lazy"
+                            srcset="https://www.eatologyasia.com/wp-content/uploads/2020/05/meal-plan-muscle-building-600x406.jpg 600w, https://www.eatologyasia.com/wp-content/uploads/2020/05/meal-plan-muscle-building-360x244.jpg 360w, https://www.eatologyasia.com/wp-content/uploads/2020/05/meal-plan-muscle-building-530x359.jpg 530w, https://www.eatologyasia.com/wp-content/uploads/2020/05/meal-plan-muscle-building.jpg 713w"
+                            sizes="(max-width: 600px) 100vw, 600px"></a>
+                    <div class="mj-meal-slider-content">
+                        <a href="https://www.eatologyasia.com/product/meal-plans/healthy/optimal-performance/">
+                            <h2>Optimal Performance</h2>
+                            <p>A diet designed to optimize physical and mental performance for people with busy and
+                                active
+                                lifestyles</p>
+                        </a><a href="https://www.eatologyasia.com/product/meal-plans/healthy/optimal-performance/"
+                            class="mj-button-links">View Details</a>
+                    </div>
+                </div>
+            </li>
+            <li class="mj-meal aos-init" data-aos="zoom-in-up">
+                <div class="mj-meal-slider-wrapper">
+                    <a href="https://www.eatologyasia.com/product/meal-plans/diet/vegetarian/">
+                        <img width="600" height="406" class="mj-meal-slider-img"
+                            src="https://www.eatologyasia.com/wp-content/uploads/2020/04/meal-plan-vegetarian-600x406.jpg"
+                            alt="Vegetarian Meal Plan" decoding="async" loading="lazy"
+                            srcset="https://www.eatologyasia.com/wp-content/uploads/2020/04/meal-plan-vegetarian-600x406.jpg 600w, https://www.eatologyasia.com/wp-content/uploads/2020/04/meal-plan-vegetarian-360x244.jpg 360w, https://www.eatologyasia.com/wp-content/uploads/2020/04/meal-plan-vegetarian-530x359.jpg 530w, https://www.eatologyasia.com/wp-content/uploads/2020/04/meal-plan-vegetarian.jpg 713w"
+                            sizes="(max-width: 600px) 100vw, 600px"></a>
+                    <div class="mj-meal-slider-content">
+                        <a href="https://www.eatologyasia.com/product/meal-plans/diet/vegetarian/">
+                            <h2>Vegetarian</h2>
+                            <p>Eliminates meat, Fish, seafood and other animal products</p>
+                        </a><a href="https://www.eatologyasia.com/product/meal-plans/diet/vegetarian/"
+                            class="mj-button-links">View Details</a>
+                    </div>
+                </div>
+            </li>
+            <li class="mj-meal aos-init" data-aos="zoom-in-up">
+                <div class="mj-meal-slider-wrapper">
+                    <a href="https://www.eatologyasia.com/product/meal-plans/lifestyle/lighter-delights/">
+                        <img width="600" height="406" class="mj-meal-slider-img"
+                            src="https://www.eatologyasia.com/wp-content/uploads/2020/01/meal-lighter-delights-600x406.jpg"
+                            alt="Meal Lighter Delights" decoding="async" loading="lazy"
+                            srcset="https://www.eatologyasia.com/wp-content/uploads/2020/01/meal-lighter-delights-600x406.jpg 600w, https://www.eatologyasia.com/wp-content/uploads/2020/01/meal-lighter-delights-360x244.jpg 360w, https://www.eatologyasia.com/wp-content/uploads/2020/01/meal-lighter-delights-530x359.jpg 530w, https://www.eatologyasia.com/wp-content/uploads/2020/01/meal-lighter-delights.jpg 713w"
+                            sizes="(max-width: 600px) 100vw, 600px"></a>
+                    <div class="mj-meal-slider-content">
+                        <a href="https://www.eatologyasia.com/product/meal-plans/lifestyle/lighter-delights/">
+                            <h2>Lighter Delights</h2>
+                            <p>A diet designed to promote weight loss by emphasizing low-calorie</p>
+                        </a><a href="https://www.eatologyasia.com/product/meal-plans/lifestyle/lighter-delights/"
+                            class="mj-button-links">View Details</a>
+                    </div>
+                </div>
+            </li>
+            <li class="mj-meal aos-init" data-aos="zoom-in-up">
+                <div class="mj-meal-slider-wrapper">
+                    <a href="https://www.eatologyasia.com/product/meal-plans/diet/flexitarian/">
+                        <img width="600" height="400" class="mj-meal-slider-img"
+                            src="https://www.eatologyasia.com/wp-content/uploads/2020/05/eatology_fresh_fruit_rice_paper_roll-1-600x400.jpg"
+                            alt="Vegan Meal Plan" decoding="async" loading="lazy"
+                            srcset="https://www.eatologyasia.com/wp-content/uploads/2020/05/eatology_fresh_fruit_rice_paper_roll-1-600x400.jpg 600w, https://www.eatologyasia.com/wp-content/uploads/2020/05/eatology_fresh_fruit_rice_paper_roll-1-360x240.jpg 360w, https://www.eatologyasia.com/wp-content/uploads/2020/05/eatology_fresh_fruit_rice_paper_roll-1-768x512.jpg 768w, https://www.eatologyasia.com/wp-content/uploads/2020/05/eatology_fresh_fruit_rice_paper_roll-1-720x480.jpg 720w, https://www.eatologyasia.com/wp-content/uploads/2020/05/eatology_fresh_fruit_rice_paper_roll-1-530x354.jpg 530w, https://www.eatologyasia.com/wp-content/uploads/2020/05/eatology_fresh_fruit_rice_paper_roll-1-810x540.jpg 810w, https://www.eatologyasia.com/wp-content/uploads/2020/05/eatology_fresh_fruit_rice_paper_roll-1-800x534.jpg 800w, https://www.eatologyasia.com/wp-content/uploads/2020/05/eatology_fresh_fruit_rice_paper_roll-1.jpg 1000w"
+                            sizes="(max-width: 600px) 100vw, 600px"></a>
+                    <div class="mj-meal-slider-content">
+                        <a href="https://www.eatologyasia.com/product/meal-plans/diet/flexitarian/">
+                            <h2>Flexitarian</h2>
+                            <p>A flexible diet that includes vegetarian and occasional non-vegetarian meals</p>
+                        </a><a href="https://www.eatologyasia.com/product/meal-plans/diet/flexitarian/"
+                            class="mj-button-links">View Details</a>
+                    </div>
+                </div>
+            </li>
+            <li class="mj-meal aos-init" data-aos="zoom-in-up">
+                <div class="mj-meal-slider-wrapper">
+                    <a href="https://www.eatologyasia.com/product/meal-plans/lifestyle/paleo/">
+                        <img width="600" height="400" class="mj-meal-slider-img"
+                            src="https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_paleo_delights_001-scaled-1-600x400.jpg"
+                            alt="Paleo Meal Plan" decoding="async" loading="lazy"
+                            srcset="https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_paleo_delights_001-scaled-1-600x400.jpg 600w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_paleo_delights_001-scaled-1-360x240.jpg 360w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_paleo_delights_001-scaled-1-1024x683.jpg 1024w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_paleo_delights_001-scaled-1-768x512.jpg 768w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_paleo_delights_001-scaled-1-1536x1024.jpg 1536w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_paleo_delights_001-scaled-1-2048x1366.jpg 2048w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_paleo_delights_001-scaled-1-720x480.jpg 720w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_paleo_delights_001-scaled-1-530x353.jpg 530w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_paleo_delights_001-scaled-1-810x540.jpg 810w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_paleo_delights_001-scaled-1-1260x840.jpg 1260w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_paleo_delights_001-scaled-1-2000x1334.jpg 2000w, https://www.eatologyasia.com/wp-content/uploads/2020/04/Eatology_paleo_delights_001-scaled-1-800x533.jpg 800w"
+                            sizes="(max-width: 600px) 100vw, 600px"></a>
+                    <div class="mj-meal-slider-content">
+                        <a href="https://www.eatologyasia.com/product/meal-plans/lifestyle/paleo/">
+                            <h2>Paleo</h2>
+                        </a><a href="https://www.eatologyasia.com/product/meal-plans/lifestyle/paleo/"
+                            class="mj-button-links">View Details</a>
+                    </div>
+                </div>
+            </li>
+            <li class="mj-meal aos-init" data-aos="zoom-in-up">
+                <div class="mj-meal-slider-wrapper">
+                    <a href="https://www.eatologyasia.com/product/meal-plans/healthy/f45-challenge/">
+                        <img width="600" height="406" class="mj-meal-slider-img"
+                            src="https://www.eatologyasia.com/wp-content/uploads/2020/05/meal-low-carbs-glutten-free-1-600x406.jpg"
+                            alt="F45 Meal Challenge" decoding="async" loading="lazy"
+                            srcset="https://www.eatologyasia.com/wp-content/uploads/2020/05/meal-low-carbs-glutten-free-1-600x406.jpg 600w, https://www.eatologyasia.com/wp-content/uploads/2020/05/meal-low-carbs-glutten-free-1-360x244.jpg 360w, https://www.eatologyasia.com/wp-content/uploads/2020/05/meal-low-carbs-glutten-free-1-530x359.jpg 530w, https://www.eatologyasia.com/wp-content/uploads/2020/05/meal-low-carbs-glutten-free-1.jpg 713w"
+                            sizes="(max-width: 600px) 100vw, 600px"></a>
+                    <div class="mj-meal-slider-content">
+                        <a href="https://www.eatologyasia.com/product/meal-plans/healthy/f45-challenge/">
+                            <h2>F45 Challenge</h2>
+                        </a><a href="https://www.eatologyasia.com/product/meal-plans/healthy/f45-challenge/"
+                            class="mj-button-links">View Details</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </main>
+</body>
+
+<script type="text/javascript" src="./aos/aos.js"></script>
+
+<script>
+    AOS.init({
+        easing: 'ease-out-back',
+        duration: 2000
+    });
+</script>
+
+<script>
+
+    const stdCarouselSliderWidth = 0.32 * 0.9 * window.innerWidth;
+
+    //设定外层容器高度等于使用定位的内层容器高度
+    let carousel_box = document.querySelector('.mj-carousel-box');
+    let carousel_slider = carousel_box.children;
+    carousel_box.style.height = carousel_slider[0].offsetHeight + 6 + 'px';
+    const old_length = carousel_slider.length;
+
+    //轮播图首尾相连效果
+    for (let i = 0; i < 4; ++i) {
+        let last = carousel_slider[i].cloneNode(true);
+        carousel_box.append(last);
+    }
+
+    //响应式宽度
+    for (let i = 0; i < carousel_slider.length; ++i)
+        carousel_slider[i].style.left = stdCarouselSliderWidth * i + 'px';
+
+    const std_max_pos = carousel_slider[old_length].offsetLeft;
+
+    // console.log(carousel_slider[0].offsetLeft);
+
+
+    let global_clientX;
+    let std_pos = 0;
+    function fun(event) {
+        let mjclientX = event.clientX ? event.clientX : event.targetTouches[0].clientX;
+        // console.log(carousel_slider[old_length].offsetLeft);
+        for (let i = 0; i < carousel_slider.length; ++i)
+            carousel_slider[i].style.left = std_pos + stdCarouselSliderWidth * i + (mjclientX - global_clientX) * 1.5 + 'px';
+        if (carousel_slider[old_length].offsetLeft <= 0) {
+            //右侧循环效果
+            std_pos = 0;
+            global_clientX = mjclientX;
+            for (let i = 0; i < carousel_slider.length; ++i)
+                carousel_slider[i].style.left = stdCarouselSliderWidth * i + 'px';
+        }
+        else if (carousel_slider[0].offsetLeft >= 5) {
+            //左侧循环效果
+            std_pos = -std_max_pos;
+            global_clientX = mjclientX;
+            for (let i = 0; i < carousel_slider.length; ++i)
+                carousel_slider[i].style.left = std_pos + stdCarouselSliderWidth * i + 'px';
+        }
+
+    }
+
+    //禁止鼠标选中
+    document.addEventListener('selectstart', function (e) {
+        e.preventDefault();
+    })
+
+    //轮播图--鼠标移动
+    carousel_box.addEventListener('mousedown', (e) => {
+        global_clientX = e.clientX;
+        carousel_box.addEventListener('mousemove', fun);
+    })
+    carousel_box.addEventListener('mouseup', (e) => {
+        std_pos = carousel_slider[0].offsetLeft;
+        carousel_box.removeEventListener('mousemove', fun);
+    })
+
+    //轮播图--触屏移动
+    carousel_box.addEventListener('touchstart', (e) => {
+        global_clientX = e.targetTouches[0].clientX;
+        carousel_box.addEventListener('touchmove', fun);
+    })
+    carousel_box.addEventListener('touchend', (e) => {
+        std_pos = carousel_slider[0].offsetLeft;
+        // let j = 1;
+        // let timer = window.setInterval(function(){
+        //     for (let i = 0; i < carousel_slider.length; ++i)
+        //             carousel_slider[i].style.left = std_pos + stdCarouselSliderWidth * i + 'px';
+        // },100);
+        carousel_box.removeEventListener('touchmove', fun);
+    })
+
+
+</script>
+
+</html>

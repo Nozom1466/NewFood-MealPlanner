@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="mainStyle.css" />
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.4.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <title>NewFoods - your versatile meal planner</title>
+  </head>
+  <body>
+    <header class="header">
+      <a href="#">
+        <img class="logo" alt="Omnifood logo" src="img/omnifood-logo.png" />
+      </a>
+
+      <nav class="main-nav">
+        <ul class="main-nav-list">
+          <li class="search-box">
+            <input
+              class="search-txt"
+              type="txt"
+              name=""
+              placeholder="Type to Search"
+            />
+            <a class="search-btn">
+              <ion-icon name="search-outline" class="search-icon"></ion-icon
+            ></a>
+          </li>
+          <li>
+            <a class="main-nav-link" href="#nutrition">Nutrition needed</a>
+          </li>
+          <li>
+            <a class="main-nav-link" href="#recommendations">Recommendations</a>
+          </li>
+          <li>
+            <a class="main-nav-link" href="#DIY">DIY Recipe</a>
+          </li>
+          <li><a class="main-nav-link nav-cta" href="#login">LOG IN</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="section-basicInfo">
+        <div class="basicInfo grid--2-cols .grid--2-rows">
+          <div class="basicInfo-gauge">
+            <div class="gaugeHeader">
+              <p class="subheading">Nutritions For Today</p>
+              <div class="filling"></div>
+            </div>
+            <div class="gauges gauge-1 margin-bottom-sm">
+              <div class="mave-1 mave">
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+                <div class="bubble"></div>
+              </div>
+            </div>
+            <div class="gauges gauge-1 margin-bottom-sm">
+              <div class="mave-2 mave"></div>
+            </div>
+            <div class="gauges gauge-1 margin-bottom-sm">
+              <div class="mave-3 mave"></div>
+            </div>
+          </div>
+          <div class="health-tips">
+            <div class="health-tips-Header">
+              <p class="subheading">Health Tips For Today</p>
+              <div class="filling"></div>
+            </div>
+            <div class="health-tips-container">
+              <input
+                type="radio"
+                name="slider"
+                class="d-none"
+                id="s1"
+                checked
+              />
+              <input type="radio" name="slider" class="d-none" id="s2" />
+              <input type="radio" name="slider" class="d-none" id="s3" />
+              <input type="radio" name="slider" class="d-none" id="s4" />
+              <input type="radio" name="slider" class="d-none" id="s5" />
+
+              <div class="cards">
+                <label for="s1" id="slide1">
+                  <div class="card">
+                    <div class="image">
+                      <img src="img/carousel-food1.jpg" alt="" />
+                      <div class="dots">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+                    </div>
+                    <div class="infos">
+                      <span class="name">TEST</span>
+                      <span class="lorem"
+                        >Lorem ipsum dolor sit amet, sit amet adipiscing elit.
+                        Aenean vel ansd . Nullam lorem. Nulla eu sodales</span
+                      >
+                    </div>
+                    <!-- <a href="/contact" class="btn-contact">details</a>
+                  <div class="socials">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-bookmark"></i>
+                    <i class="fa-solid fa-share-nodes"></i>
+                  </div> -->
+                  </div>
+                </label>
+
+                <label for="s2" id="slide2">
+                  <div class="card">
+                    <div class="image">
+                      <img src="img/carousel-food2.jpg" alt="" />
+                      <div class="dots">
+                        <div class="dot1"></div>
+                        <div class="dot2"></div>
+                        <div class="dot3"></div>
+                      </div>
+                    </div>
+                    <div class="infos">
+                      <span class="name">TEST</span>
+                      <span class="lorem"
+                        >Lorem ipsum dolor sit, adipiscing elit. Aenean vel sit
+                        ansd . Nullam lorem. Nulla eu sodales karma
+                        stellus</span
+                      >
+                    </div>
+                    <!-- <a href="/contact" class="btn-contact">details</a>
+                  <div class="socials">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-bookmark"></i>
+                    <i class="fa-solid fa-share-nodes"></i>
+                  </div> -->
+                  </div>
+                </label>
+
+                <label for="s3" id="slide3">
+                  <div class="card">
+                    <div class="image">
+                      <img src="img/carousel-food3.jpg" alt="" />
+                      <div class="dots">
+                        <div class="dot1"></div>
+                        <div class="dot2"></div>
+                        <div class="dot3"></div>
+                      </div>
+                    </div>
+                    <div class="infos">
+                      <span class="name">TESTn</span>
+                      <span class="lorem"
+                        >Lorem ipsum dolor, sit amet let kar adipiscing. Aenean
+                        vel velit sit ansd . Nullam lorem. Nulla karma
+                        stellus</span
+                      >
+                    </div>
+                    <!-- <a href="/contact" class="btn-contact">details</a>
+                  <div class="socials">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-bookmark"></i>
+                    <i class="fa-solid fa-share-nodes"></i>
+                  </div> -->
+                  </div>
+                </label>
+
+                <label for="s4" id="slide4">
+                  <div class="card">
+                    <div class="image">
+                      <img src="img/carousel-food4.jpg" alt="" />
+                      <div class="dots">
+                        <div class="dot1"></div>
+                        <div class="dot2"></div>
+                        <div class="dot3"></div>
+                      </div>
+                    </div>
+                    <div class="infos">
+                      <span class="name">TEST</span>
+                      <span class="lorem"
+                        >Lorem ipsum dolor sit, sit amet elit. Aenean sit amet
+                        sit amet vel velit sit ansd. Nulla eu sodales
+                        stellus</span
+                      >
+                    </div>
+                    <!-- <a href="/contact" class="btn-contact">details</a>
+                  <div class="socials">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-bookmark"></i>
+                    <i class="fa-solid fa-share-nodes"></i>
+                  </div> -->
+                  </div>
+                </label>
+
+                <label for="s5" id="slide5">
+                  <div class="card">
+                    <div class="image">
+                      <img src="img/carousel-food5.jpg" alt="" />
+                      <div class="dots">
+                        <div class="dot1"></div>
+                        <div class="dot2"></div>
+                        <div class="dot3"></div>
+                      </div>
+                    </div>
+                    <div class="infos">
+                      <span class="name">TEST</span>
+                      <span class="lorem"
+                        >Lorem ipsum sit amet, sit amet elit. Aenean vel velit
+                        ansd . Nullam lorem. Nulla eu sodales stellus</span
+                      >
+                    </div>
+                    <!-- <a href="/contact" class="btn-contact">details</a>
+                  <div class="socials">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-bookmark"></i>
+                    <i class="fa-solid fa-share-nodes"></i>
+                  </div> -->
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="meal_generator">
+            <div class="generator">
+              <div
+                class="generator-header subheading text-left margin-bottom-md"
+              >
+                DIY and generate your meal plan
+              </div>
+
+              <div class="preselector-eatingtype">
+                <ul class="eating-types grid--3-cols">
+                  <li class="eating-type type-selected" data-value="anything">
+                    <a class="nav-link" href="#"
+                      ><ion-icon
+                        name="infinite-outline"
+                        class="eatingtype-icon"
+                      ></ion-icon>
+                      <p>Anything</p>
+                    </a>
+                  </li>
+                  <li class="eating-type" data-value="paleo">
+                    <a class="nav-link" href="#"
+                      ><ion-icon
+                        name="flame-outline"
+                        class="eatingtype-icon"
+                      ></ion-icon>
+                      <p>Paleo</p></a
+                    >
+                  </li>
+                  <li class="eating-type" data-value="vegetarian">
+                    <a class="nav-link" href="#"
+                      ><ion-icon
+                        name="leaf-outline"
+                        class="eatingtype-icon"
+                      ></ion-icon>
+                      <p>Vegetarian</p>
+                    </a>
+                  </li>
+                  <li class="eating-type" data-value="vegan">
+                    <a class="nav-link" href="#"
+                      ><ion-icon name="leaf" class="eatingtype-icon"></ion-icon>
+                      <p>Vegan</p></a
+                    >
+                  </li>
+                  <li class="eating-type" data-value="ketogenic">
+                    <a class="nav-link" href="#"
+                      ><ion-icon
+                        name="restaurant-outline"
+                        class="eatingtype-icon"
+                      ></ion-icon>
+                      <p>Ketogenic</p></a
+                    >
+                  </li>
+                  <li class="eating-type" data-value="mediterranean">
+                    <a class="nav-link" href="#"
+                      ><ion-icon
+                        name="ribbon-outline"
+                        class="eatingtype-icon"
+                      ></ion-icon>
+                      <p>Mediterranean</p></a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer></footer>
+  </body>
+</html>

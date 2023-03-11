@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        .login-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to right bottom, #ecf9ee, #bae8c1);
+        }
+
+        .login-section .color {
+            position: absolute;
+            filter: blur(150px);
+        }
+
+        .login-section .color:nth-child(1) {
+            top: -500px;
+            width: 900px;
+            height: 900px;
+            background: #40c057;
+        }
+
+        .login-section .color:nth-child(2) {
+            bottom: -150px;
+            left: 100px;
+            width: 500px;
+            height: 500px;
+            background: #fffd87;
+        }
+
+        .login-section .color:nth-child(3) {
+            bottom: 50px;
+            right: 100px;
+            width: 400px;
+            height: 400px;
+            background: #00ffc3;
+        }
+
+        .box {
+            position: relative;
+        }
+
+        @keyframes animate {
+
+            0%,
+            100% {
+                transform: translateY(-40px);
+            }
+
+            50% {
+                transform: translateY(40px);
+            }
+        }
+
+        .box .circle {
+            position: absolute;
+            backdrop-filter: blur(5px);
+            border-radius: 50%;
+            opacity: 0.8;
+        }
+
+        .box .circle:nth-child(1) {
+            top: -30px;
+            right: -270px;
+            width: 350px;
+            height: 350px;
+            transform: rotate(-45deg);
+            filter: blur(2px);
+            box-shadow: -15px 5px 45px rgba(0, 0, 0, 0.05);
+            border-right: 1px solid rgba(255, 255, 255, 0.5);
+            border-left: 3px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .box .circle:nth-child(2) {
+            top: -250px;
+            left: -170px;
+            width: 280px;
+            height: 280px;
+            box-shadow:
+                inset 5px 5px 5px rgba(255, 255, 255, 0.1),
+                inset -5px -5px 15px rgba(255, 255, 255, 0.1);
+        }
+
+
+        .box .circle:nth-child(3) {
+            bottom: -340px;
+            left: 100px;
+            width: 230px;
+            height: 230px;
+            box-shadow:
+                inset 5px 5px 5px rgba(255, 255, 255, 0.1),
+                inset -5px -5px 15px rgba(255, 255, 255, 0.1)
+        }
+
+        .box .square {
+            position: absolute;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            animation: animate 10s linear infinite;
+            animation-delay: calc(-1s * var(--i));
+        }
+
+        .box .square:nth-child(4) {
+            top: -50px;
+            right: -60px;
+            width: 100px;
+            height: 100px;
+        }
+
+        .box .square:nth-child(5) {
+            top: 150px;
+            left: -100px;
+            width: 120px;
+            height: 120px;
+            z-index: 2;
+        }
+
+        .box .square:nth-child(6) {
+            bottom: 50px;
+            right: -60px;
+            width: 80px;
+            height: 80px;
+            z-index: 2;
+        }
+
+        .box .square:nth-child(7) {
+            bottom: -40px;
+            left: 100px;
+            width: 50px;
+            height: 50px;
+        }
+
+        .box .square:nth-child(8) {
+            top: -80px;
+            left: 140px;
+            width: 60px;
+            height: 60px;
+        }
+
+        .container {
+            position: relative;
+            width: 400px;
+            min-height: 400px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .form {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            padding: 40px;
+        }
+
+        .form h2 {
+            position: relative;
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 40px;
+            cursor: default;
+        }
+
+        .form h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 146px;
+            height: 4px;
+            border-radius: 5px;
+            background: white;
+        }
+
+        .form .inputbox {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .form .inputbox input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-right: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 16px;
+            letter-spacing: 1px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .form .inputbox input::placeholder {
+            color: white;
+        }
+
+        .form .inputbox input[type="submit"] {
+            background: white;
+            color: #666;
+            max-width: 100px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .form .inputbox input[type="submit"]:hover {
+            border-color: rgba(34, 230, 93, 0.5);
+            background: #bae8c1;
+            color: #40c057;
+        }
+
+        .form .inputbox input[type="submit"]:active {
+            border-color: rgba(34, 230, 93, 0.5);
+            background: #bae8c1;
+            color: rgba(34, 230, 93, 0.5);
+        }
+
+        .forget {
+            margin-top: 5px;
+            color: white;
+            cursor: default;
+        }
+
+        .forget a {
+            color: white;
+            font-weight: 600;
+        }
+
+        .forget a:hover {
+            color: #40c057;
+        }
+
+        .forget a:active {
+            color: rgba(34, 230, 93, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="login-section">
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="color"></div>
+        <div class="box">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="square" style="--i:0;"></div>
+            <div class="square" style="--i:1;"></div>
+            <div class="square" style="--i:2;"></div>
+            <div class="square" style="--i:3;"></div>
+            <div class="square" style="--i:4;"></div>
+            <div class="container">
+                <div class="form">
+                    <h2>Login Form</h2>
+                    <form action="#.php" method="post">
+                        <div class="inputbox">
+                            <input type="text" placeholder="Username">
+                        </div>
+                        <div class="inputbox">
+                            <input type="password" placeholder="Password">
+                        </div>
+                        <div class="inputbox">
+                            <input type="submit" value="Login">
+                        </div>
+                        <p class="forget">Forgot password ?
+                            <a href="#">Click Here</a>
+                        </p>
+                        <p class="forget">Don't have an accent ?
+                            <a href="#">Sign up</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+<script>
+    //阻止文本选中
+    document.addEventListener('selectstart', function (e) {
+        e.preventDefault();
+    })
+
+    // let username = document.querySelector("[type='text']");
+    // let password = document.querySelector("[type='password']");
+
+</script>
+
+</html>
